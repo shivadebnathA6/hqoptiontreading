@@ -21,7 +21,7 @@ def calculate_bollinger_bands(data, window=20, num_std_dev=2):
 
 def calculate_ichimoku_cloud(data):
     # Placeholder for Ichimoku Cloud calculation
-    ichimoku = ta.trend.IchimokuIndicator(high=data['high'], low=data['low'], close=data['close'])
+    ichimoku = ta.trend.IchimokuIndicator(high=data['high'], low=data['low'])
     data['Tenkan-sen'] = ichimoku.ichimoku_conversion_line()
     data['Kijun-sen'] = ichimoku.ichimoku_base_line()
     data['Senkou Span A'] = ichimoku.ichimoku_a()
