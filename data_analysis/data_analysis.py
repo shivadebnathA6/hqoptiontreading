@@ -13,8 +13,10 @@ def calculate_option_greeks(option_data):
     return option_data
 
 def calculate_bollinger_bands(data, window=20, num_std_dev=2):
-    bb = ta.bbands(data['close'], length=window, std=num_std_dev)
-    data = pd.concat([data, bb], axis=1)
+    bb = ta.volatility.BollingerBands(close=data['close'], window=window, window_dev=num_std_dev)
+    data['Upper Band'] = bb.bollinger_hband()
+    data['Middle Band'] = bb.bollinger_mavg()
+    data['Lower Band'] = bb.bollinger_lband()
     return data
 
 def calculate_ichimoku_cloud(data):
