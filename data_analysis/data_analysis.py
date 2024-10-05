@@ -1,7 +1,7 @@
 
 import pandas as pd
 import numpy as np
-import pandas_ta as ta
+import ta
 
 def calculate_option_greeks(option_data):
     # Placeholder for option Greeks calculation
