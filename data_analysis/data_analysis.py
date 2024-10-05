@@ -1,7 +1,7 @@
 
 import pandas as pd
 import numpy as np
-import talib
+import pandas_ta as ta
 
 def calculate_option_greeks(option_data):
     # Placeholder for option Greeks calculation
@@ -13,15 +13,14 @@ def calculate_option_greeks(option_data):
     return option_data
 
 def calculate_bollinger_bands(data, window=20, num_std_dev=2):
-    data['Upper Band'], data['Middle Band'], data['Lower Band'] = talib.BBANDS(data['close'], timeperiod=window, nbdevup=num_std_dev, nbdevdn=num_std_dev, matype=0)
+    bb = ta.bbands(data['close'], length=window, std=num_std_dev)
+    data = pd.concat([data, bb], axis=1)
     return data
 
 def calculate_ichimoku_cloud(data):
     # Placeholder for Ichimoku Cloud calculation
-    data['Tenkan-sen'] = talib.MIN(data['high'], timeperiod=9) + talib.MAX(data['low'], timeperiod=9) / 2
-    data['Kijun-sen'] = talib.MIN(data['high'], timeperiod=26) + talib.MAX(data['low'], timeperiod=26) / 2
-    data['Senkou Span A'] = (data['Tenkan-sen'] + data['Kijun-sen']) / 2
-    data['Senkou Span B'] = talib.MIN(data['high'], timeperiod=52) + talib.MAX(data['low'], timeperiod=52) / 2
+    ichimoku = ta.ichimoku(data['high'], data['low'], data['close'])
+    data = pd.concat([data, ichimoku], axis=1)
     return data
 
 def calculate_fibonacci_retracements(data):
