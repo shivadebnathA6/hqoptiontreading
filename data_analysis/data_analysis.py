@@ -26,7 +26,10 @@ def calculate_ichimoku_cloud(data):
     data['Kijun-sen'] = ichimoku.ichimoku_base_line()
     data['Senkou Span A'] = ichimoku.ichimoku_a()
     data['Senkou Span B'] = ichimoku.ichimoku_b()
-    data = pd.concat([data, ichimoku], axis=1)
+    data['Tenkan-sen'] = ichimoku.ichimoku_conversion_line()
+    data['Kijun-sen'] = ichimoku.ichimoku_base_line()
+    data['Senkou Span A'] = ichimoku.ichimoku_a()
+    data['Senkou Span B'] = ichimoku.ichimoku_b()
     return data
 
 def calculate_fibonacci_retracements(data):
